@@ -2,31 +2,26 @@
     <h2>BMI Calculator</h2>
     
     <form [formGroup]="bmiForm" (ngSubmit)="calculateBMI()">
-        <div class="form-group">
-            <label for="weight">Weight (kg):</label>
-            <input type="number" class="form-control" id="weight" formControlName="weight">
-            <div *ngIf="bmiForm.get('weight')?.invalid && (bmiForm.get('weight')?.dirty || bmiForm.get('weight')?.touched)">
-              <div *ngIf="bmiForm.get('weight')?.errors?.['required']" class="error-message">Weight is required</div>
-              <div *ngIf="bmiForm.get('weight')?.errors?.['min']" class="error-message">Weight cannot be negative</div>
-            </div>
-          </div>
+        <mat-form-field appearance="fill">
+            <mat-label>Weight (kg):</mat-label>
+            <input matInput type="number" formControlName="weight">
+            <mat-error *ngIf="bmiForm.get('weight')?.errors?.['required']">Weight is required</mat-error>
+            <mat-error *ngIf="bmiForm.get('weight')?.errors?.['min']">Weight cannot be negative</mat-error>
+        </mat-form-field>
           
-          <div class="form-group">
-            <label for="height">Height (cm):</label>
-            <input type="number" class="form-control" id="height" formControlName="height">
-            <div *ngIf="bmiForm.get('height')?.invalid && (bmiForm.get('height')?.dirty || bmiForm.get('height')?.touched)">
-              <div *ngIf="bmiForm.get('height')?.errors?.['required']" class="error-message">Height is required</div>
-              <div *ngIf="bmiForm.get('height')?.errors?.['min']" class="error-message">Height cannot be negative</div>
-            </div>
-          </div>
+        <mat-form-field appearance="fill">
+          <mat-label>Height (cm):</mat-label>
+          <input matInput type="number" formControlName="height">
+          <mat-error *ngIf="bmiForm.get('height')?.errors?.['required']">Height is required</mat-error>
+          <mat-error *ngIf="bmiForm.get('height')?.errors?.['min']">Height cannot be negative</mat-error>
+        </mat-form-field>
           
-      
-        <button type="submit" [disabled]="bmiForm.invalid">Calculate BMI</button>
-      
-        <div *ngIf="bmiInterpretation" class="result">
-          <h4>Your BMI is: {{ bmi | number:'1.2-2' }}</h4>
-          <p>{{bmiInterpretation}}</p>
-          <i class="fas fa-{{ weatherIcon }}"></i>
-        </div>
-    </form>
+        <button mat-raised-button color="primary" type="submit" [disabled]="bmiForm.invalid">Calculate BMI</button>
+    </form> 
+        
+    <div *ngIf="bmi" class="mat-card result" [@fadeInOut]>
+      <h4>Your BMI is: {{ bmi | number:'1.2-2' }}</h4>
+      <p>Your result indicates {{bmiInterpretation}}</p>
+      <i class="fas fa-{{ weatherIcon }}"></i>
+    </div>
 </div>

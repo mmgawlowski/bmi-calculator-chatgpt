@@ -17,39 +17,23 @@
     color: #343a40;
   }
   
-  .form-group {
-    margin-bottom: 20px;
+  mat-form-field {
     width: 100%;
   }
   
-  label {
+  mat-label {
     font-weight: bold;
     color: #6c757d;
   }
-  
-  input[type="number"] {
-    width: 20%;
-    padding: 10px;
-    border: 1px solid #ced4da;
-    border-radius: 5px;
-    font-size: 16px;
-  }
 
   button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
+    margin-top: 20px;
   }
   
   .result {
     text-align: center;
     padding: 10px;
-    background-color: #007bff;
-    color: #fff;
+    background-color: #e2e4e6;
     border-radius: 5px;
     margin-top: 20px;
   }

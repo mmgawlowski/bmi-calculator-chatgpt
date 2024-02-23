@@ -13,13 +13,13 @@ export class BmiCalculatorService {
 
   interpretBMI(bmi: number): string {
     if (bmi < 18.5) {
-      return 'Underweight';
+      return 'underweight';
     } else if (bmi >= 18.5 && bmi < 25) {
-      return 'Normal weight';
+      return 'normal weight';
     } else if (bmi >= 25 && bmi < 30) {
-      return 'Overweight';
+      return 'overweight';
     } else {
-      return 'Obese';
+      return 'obesity';
     }
   }
 }

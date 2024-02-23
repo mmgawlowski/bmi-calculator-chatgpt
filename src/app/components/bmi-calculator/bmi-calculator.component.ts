@@ -2,13 +2,24 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { BmiCalculatorService } from '../../services/bmi-calculator.service';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { trigger, state, style, animate, transition } from '@angular/animations';
 
 @Component({
   selector: 'app-bmi-calculator',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, MatButtonModule, MatInputModule],
   templateUrl: './bmi-calculator.component.html',
-  styleUrl: './bmi-calculator.component.css'
+  styleUrl: './bmi-calculator.component.css',
+  animations: [
+    trigger('fadeInOut', [
+      state('void', style({
+        opacity: 0
+      })),
+      transition('void <=> *', animate(500)),
+    ])
+  ]
 })
 export class BmiCalculatorComponent {
   bmiForm: FormGroup;
