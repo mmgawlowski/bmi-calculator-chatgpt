@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { BmiCalculatorComponent } from './bmi-calculator/bmi-calculator.component';
+import { BmiCalculatorComponent } from './components/bmi-calculator/bmi-calculator.component';
 
 @Component({
   selector: 'app-root',

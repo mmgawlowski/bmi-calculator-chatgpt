@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { BmiCalculatorService } from '../../services/bmi-calculator.service';
 
 @Component({
   selector: 'app-bmi-calculator',
@@ -12,10 +13,10 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 export class BmiCalculatorComponent {
   bmiForm: FormGroup;
   bmi!: number;
-  bmiInterpretation!: string;
-  weatherIcon!: string;
+  bmiInterpretation = '';
+  weatherIcon = '';
 
-  constructor() {
+  constructor(private bmiCalculatorService: BmiCalculatorService) {
     this.bmiForm = new FormGroup({
       weight: new FormControl(null, [Validators.required, Validators.min(0)]),
       height: new FormControl(null, [Validators.required, Validators.min(0)])
@@ -25,25 +26,21 @@ export class BmiCalculatorComponent {
   calculateBMI() {
     if (this.bmiForm.valid) {
       const weight = this.bmiForm.get('weight')!.value;
-      const height = this.bmiForm.get('height')!.value;
-
-      this.bmi = weight / ((height / 100) * (height / 100));
-      this.interpretBMI(this.bmi);
+      const height = this.bmiForm.get('height')!.value;  
+      this.bmi = this.bmiCalculatorService.calculateBMI(weight, height);
+      this.bmiInterpretation = this.bmiCalculatorService.interpretBMI(this.bmi);
+      this.setWeatherIcon(this.bmi);
     }
   }
 
-  interpretBMI(bmi: number) {
+  private setWeatherIcon(bmi: number) {
     if (bmi < 18.5) {
-      this.bmiInterpretation = 'Underweight';
-      this.weatherIcon = 'cloud-sun';
+      this.weatherIcon = 'cloud';
     } else if (bmi >= 18.5 && bmi < 25) {
-      this.bmiInterpretation = 'Normal weight';
       this.weatherIcon = 'sun';
     } else if (bmi >= 25 && bmi < 30) {
-      this.bmiInterpretation = 'Overweight';
-      this.weatherIcon = 'cloud';
+      this.weatherIcon = 'cloud-sun';
     } else {
-      this.bmiInterpretation = 'Obese';
       this.weatherIcon = 'cloud-rain';
     }
   }
