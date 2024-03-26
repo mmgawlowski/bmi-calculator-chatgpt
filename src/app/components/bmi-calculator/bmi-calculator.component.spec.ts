@@ -2,13 +2,15 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BmiCalculatorComponent } from './bmi-calculator.component';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+
 describe('BmiCalculatorComponent', () => {
   let component: BmiCalculatorComponent;
   let fixture: ComponentFixture<BmiCalculatorComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [BmiCalculatorComponent]
+      imports: [BmiCalculatorComponent, BrowserAnimationsModule]
     })
     .compileComponents();
     
